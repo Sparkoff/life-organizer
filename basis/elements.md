@@ -1,0 +1,511 @@
++ Maison
+	- [X] Dimensions
+		- Pièce
+		- Surface
+		- Hauteur sous-plafond
+	- [X] Référence peinture
+		- Pièce
+		- Référence
+	- [X] Dimensions du linge de lit
+		- Pièce
+		- Taille drap-housse
+		- Taille housse de couette
+		- Nombre coussins
+	- [X] Références des ampoules
+		- Pièce
+		- Nombre
+		- Référence
+	- [X] Relevés des consommations
+		- Date
+		- Électricité HP
+		- Électricité HC
+		- Eau
+		- Gaz
+	- [X] Chat
+		- Quoi
+		- Par quoi
+		- Prévue le
+		- Fait le
+	- [X] Notes
+		- Date
+		- Commentaire
++ Pratique
+	- [X] À acheter
+		- Type
+		- Quoi
+		- Personne
+		- Coût
+		- Acheté le
+	- [X] À emporter en vacances
+		- Vacances
+		- Date
+		- Quoi
+		- Commentaire
+	- [X] Anniversaire
+		- Qui
+		- Quand
++ Espace extérieur
+	- [X] Plantations
+		- Surface
+		- Quoi
+		- Où
+		- Acheté à
+		- Soins
+	- [X] À faire dans le jardin
+		- Quoi
+		- Quand
+		- Par qui
+		- Fait le
+		- Coût
+		- Commentaire
+	- [X] Équipement de jardin
+		- Quoi
+		- Acheté le
+		- Où
+		- Commentaire
++ Travaux et Entretien
+	- [X] Réparations/Entretiens faits
+		- Date
+		- Quoi
+		- Par qui
+		- Lien carnet d'addresse ?
+		- Coût
+		- Prochain rendez-vous
+		- Note
+	- [X] À faire dans la maison
+		- Quoi
+		- Quand
+		- Par qui
+		- Fait le
+		- Coût
+		- Commentaire
+	- [X] Voiture
+		- Quoi
+		- Par qui
+		- Prévu le
+		- Fait le
+	- [X] Notes
+		- Date
+		- Commentaire
++ Locations
++ Inventaire
+	- [X] Linge de lit
+		- Pièce
+		- Type
+		- Dimensions
+		- Liaison/Lot ?
+		- Note
+	- [X] Cellier
+		- Quoi
+		- DLC
+		- Nombre
+		- Rangé le
+	- [X] Congelateur
+		- Quoi
+		- DLC
+		- Nombre
+		- Rangé le
+	- [X] Pharmacie
+		- Nom
+		- Pathologie
+		- DLC
+		- Nombre
+		- Rangé le
+	- [X] Meuble salon
+		- Tiroir
+		- Contenu
+		- Rangé le
+	- [X] Notes
+		- Date
+		- Commentaire
++ Carnet d'adresses
+	- [X] Carnet d'adresses
+		- Quoi
+		- Qui
+		- Téléphone
+		- Contrat
+		- Dernière intervention
+		- Note
++ Culture
+	- [X] Livres
+		- Titre
+		- Auteur
+		- Lu le
+		- Évaluation
+		- Commentaires
+	- [X] Films
+		- Titre
+		- Vu le
+		- Évaluation
+		- Commentaires
+	- [X] Séries
+		- Titre
+		- Saison
+		- Vu le
+		- Évaluation
+		- Commentaires
+	- [X] Concerts/Spectacles
+		- Quoi
+		- Où
+		- Vu le
+		- Évaluation
+		- Commentaires
+	- [X] Notes
+		- Date
+		- Commentaire
++ Loisirs
+	- [X] Restos
+		- Nom
+		- Adresse
+		- Tél
+		- Site web
+		- Spécialité
+		- Commentaires
+	- [X] Recettes
+		- Quoi
+		- Saison
+		- Sucré/Salé
+		- Source
+		- Fait le
+	- [X] Couture
+		- Quoi
+		- Couleur
+		- Type
+		- Patron
+		- Fait le
+		- Provision
+		- Commentaire
+	- [X] Notes
+		- Date
+		- Commentaire
++ Perso
+	- [X] Résolutions
+		- Quoi
+		- Date
+		- Durée
+		- Commentaire
+	- [X] À ne plus faire
+		- Quoi
+		- Date
+		- Commentaire
++ Budget
+	- [X] Économie
+		- Mois
+		- Combien
+		- Pourquoi
+	- [X] Dépenses fixes
+		- Type
+		- Récurence
+		- Montant
+	- [X] Occasionnel
+		- Quoi
+		- Prévu le
+		- Montant
+		- Fait le
++ À planifier / Général
+	- [X] To do list
+		- Date
+		- Titre
+		- Fait le
+		- Commentaire
+
+
+
+
+## Sommaire
+
++ Maison
+	- [ ] Surfaces
+	- [X] Dimensions
+		- Pièce
+		- Surface
+		- Hauteur sous-plafond
+	- [X] Référence peinture
+		- Pièce
+		- Référence
+	- [ ] Dimensions des stores/rideaux
+	- [X] Dimensions du linge de lit
+		- Pièce
+		- Taille drap-housse
+		- Taille housse de couette
+		- Nombre coussins
+	- [X] Références des ampoules
+		- Pièce
+		- Nombre
+		- Référence
+	- [ ] Codes
+	- [ ] Clés
+	- [ ] Aides/Employés
+	- [X] Relevés des consommations
+		- Date
+		- Électricité HP
+		- Électricité HC
+		- Eau
+		- Gaz
+	- [X] Chat
+		- Quoi
+		- Par quoi
+		- Prévue le
+		- Fait le
+	- [X] Notes
+		- Date
+		- Commentaire
++ Pratique
+	- [ ] À faire dans la maison
+	- [ ] À faire dans le jardin
+	- [X] À acheter
+		- Type
+		- Quoi
+		- Personne
+		- Coût
+		- Acheté le
+	- [X] À emporter en vacances
+		- Vacances
+		- Date
+		- Quoi
+		- Commentaire
+	- [X] Anniversaire
+		- Qui
+		- Quand
+	- [ ] À emporter au ski
+	- [ ] À emporter au soleil
++ Espace extérieur
+	- [X] Plantations
+		- Surface
+		- Quoi
+		- Où
+		- Acheté à
+		- Soins
+	- [X] À faire dans le jardin
+		- Quoi
+		- Quand
+		- Par qui
+		- Fait le
+		- Coût
+		- Commentaire
+	- [X] Équipement de jardin
+		- Quoi
+		- Acheté le
+		- Où
+		- Commentaire
+	- [ ] Notes
++ Travaux et Entretien
+	- [ ] Travaux/Réparations faits
+	- [ ] Travaux/Réparations à faire
+	- [X] Réparations/Entretiens faits
+		- Date
+		- Quoi
+		- Par qui
+		- Lien carnet d'addresse ?
+		- Coût
+		- Prochain rendez-vous
+		- Note
+	- [X] À faire dans la maison
+		- Quoi
+		- Quand
+		- Par qui
+		- Fait le
+		- Coût
+		- Commentaire
+	- [X] Voiture
+		- Quoi
+		- Par qui
+		- Prévu le
+		- Fait le
+	- [X] Notes
+		- Date
+		- Commentaire
++ Locations
+	- [ ] Notes
++ Inventaire
+	- [X] Linge de lit
+		- Pièce
+		- Type
+		- Dimensions
+		- Liaison/Lot ?
+		- Note
+	- [X] Cellier
+		- Quoi
+		- DLC
+		- Nombre
+		- Rangé le
+	- [X] Congelateur
+		- Quoi
+		- DLC
+		- Nombre
+		- Rangé le
+	- [X] Pharmacie
+		- Nom
+		- Pathologie
+		- DLC
+		- Nombre
+		- Rangé le
+	- [X] Meuble salon
+		- Tiroir
+		- Contenu
+		- Rangé le
+	- [X] Notes
+		- Date
+		- Commentaire
++ Carnet d'adresses
+	- [X] Carnet d'adresses
+		- Quoi
+		- Qui
+		- Téléphone
+		- Contrat
+		- Dernière intervention
+		- Note
+	- [ ] Notes
++ Culture
+	- [X] Livres
+		- Titre
+		- Auteur
+		- Lu le
+		- Évaluation
+		- Commentaires
+	- [X] Films
+		- Titre
+		- Vu le
+		- Évaluation
+		- Commentaires
+	- [X] Séries
+		- Titre
+		- Saison
+		- Vu le
+		- Évaluation
+		- Commentaires
+	- [ ] Musiques
+	- [X] Concerts/Spectacles
+		- Quoi
+		- Où
+		- Vu le
+		- Évaluation
+		- Commentaires
+	- [ ] Expos
+	- [ ] Pièce de théâtre
+	- [X] Notes
+		- Date
+		- Commentaire
++ Loisirs
+	- [X] Restos
+		- Nom
+		- Adresse
+		- Tél
+		- Site web
+		- Spécialité
+		- Commentaires
+	- [X] Recettes
+		- Quoi
+		- Saison
+		- Sucré/Salé
+		- Source
+		- Fait le
+	- [ ] Repas
+	- [ ] Sports
+	- [ ] À faire en amoureux
+	- [ ] Vacances
+	- [ ] Week-ends
+	- [X] Couture
+		- Quoi
+		- Couleur
+		- Type
+		- Patron
+		- Fait le
+		- Provision
+		- Commentaire
+	- [X] Notes
+		- Date
+		- Commentaire
++ Perso
+	- [ ] Objectifs personnels
+	- [ ] Objectifs professionnels
+	- [X] Résolutions
+		- Quoi
+		- Date
+		- Durée
+		- Commentaire
+	- [X] À ne plus faire
+		- Quoi
+		- Date
+		- Commentaire
+	- [ ] Erreur à ne plus commettre
++ À planifier / Général
+	- [X] To do list
+		- Date
+		- Titre
+		- Fait le
+		- Commentaire
+
+
+## Détails
+
++ Livres
+	- Titre
+	- Auteur
+	- Éditeur
+	- Lu le
+	- Commentaires
++ Resto à faire
+	- Nom
+	- Adresse
+	- Tél
+	- Email
+	- Spécialité
+	- Fait avec
+	- Fait le
+	- Commentaires
++ Surfaces
+	- Surface totale
+	- Pièce
+	- Surface
++ Référence peinture
+	- Pièce
+	- Peinture
++ Dimensions des stores/rideaux
+	- Pièce
+	- Taille
++ Dimensions du linge de lit
+	- Pièce
+	- Taille drap-housse
+	- Taille housse de couette
+	- Taille drap
+	- Taille pièce
++ Références des ampoules
+	- Pièce
+	- Référence
++ Codes
+	- Élément
+	- Code
++ Relevés des consommations
+	- Date
+	- Électricité HP
+	- Électricité HC
+	- Eau
+	- Gaz
++ Plantations
+	- Surface totale
+	- Quoi
+	- Où
+	- Acheté à
+	- Soins
+	- À faire
++ Entretien
+	- Travaux/Réparations faits
+	- Faits le
+	- Par
+	- Réf produits utilisés
+	- Coût
+	- Notes
++ À faire dans la maison
+	- Quoi
+	- Quand
+	- Par qui
+	- Coût estimé
+	- Fait le
+	- Coût réel
+	- Notes
++ Objectifs personnels
+	- Quoi
+	- Quand
+	- Où
+	- Avec qui
