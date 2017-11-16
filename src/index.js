@@ -1,8 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import React from 'react'
+import { render } from 'react-dom'
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+import { BrowserRouter } from 'react-router-dom'
+
+import registerServiceWorker from './services/registerServiceWorker'
+
+import App from './scenes/App'
+
+import './style.css'
+import 'semantic-ui-css/semantic.min.css'
+
+
+render((
+    <BrowserRouter>
+    	<App/>
+    </BrowserRouter>
+), document.getElementById('root'))
+
+
+registerServiceWorker()
