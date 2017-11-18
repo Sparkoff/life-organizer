@@ -15,14 +15,14 @@ class App extends Component {
 				"bottom": "0px",
 				"left": "0px",
 				"width": "250px",
-				"padding-bottom": "1em",
-				"overflow-y": "scroll"
+				"paddingBottom": "1em",
+				"overflowY": "scroll"
 			},
 			"content": {
-				"margin-left": "250px",
-				"padding-left": "10px",
-			    "min-width": "550px",
-			    "max-width": "1150px"
+				"marginLeft": "250px",
+				"paddingLeft": "10px",
+			    "minWidth": "550px",
+			    "maxWidth": "1150px"
 			}
 		}
 
