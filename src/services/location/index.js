@@ -7,6 +7,7 @@ const getLocation = () => {
 }
 export const currentLocation = getLocation
 
+
 const getPath = () => {
 	try {
 		var path = getLocation().split('/')
@@ -17,6 +18,7 @@ const getPath = () => {
 	}
 }
 export const currentPath = getPath
+
 
 const getSlug = () => {
 	try {

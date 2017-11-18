@@ -1,5 +1,6 @@
 import { currentSlug } from '../../services/location'
 
+
 const defaultState = {
 	activeItem: currentSlug()
 }
@@ -16,5 +17,6 @@ const navigation = (state, action) => {
 
 	return newState
 }
+
 
 export default navigation

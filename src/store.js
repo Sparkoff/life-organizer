@@ -12,4 +12,5 @@ const reducers = combineReducers({
 
 const middleware = composeWithDevTools(applyMiddleware(promise(), thunk))
 
+
 export default createStore(reducers, middleware)
