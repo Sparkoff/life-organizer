@@ -1,58 +1,44 @@
 import React from 'react'
 
 
-const getRestaurant = () => {
-	return {
-		subTitle: "Restos",
-		content: (<p>restos (à implémenter)</p>)
+const getRestaurant = () =>
+	(<p>restos (à implémenter)</p>)
+
+const getRecipe = () =>
+	(<p>recettes (à implémenter)</p>)
+
+const getCouture = () =>
+	(<p>couture (à implémenter)</p>)
+
+const getNote = () =>
+	(<p>notes (à implémenter)</p>)
+
+
+export default (subMenu, menuInfos) => {
+	let pageInfo = {
+		icon: menuInfos.icon,
+		title: menuInfos.title
 	}
-}
-
-const getRecipe = () => {
-	return {
-		subTitle: "Recettes",
-		content: (<p>recettes (à implémenter)</p>)
-	}
-}
-
-const getCouture = () => {
-	return {
-		subTitle: "Couture",
-		content: (<p>couture (à implémenter)</p>)
-	}
-}
-
-const getNote = () => {
-	return {
-		subTitle: "Notes",
-		content: (<p>notes (à implémenter)</p>)
-	}
-}
-
-
-export default (subMenu) => {
 	switch (subMenu) {
 		case "restos":
-			subMenu = getRestaurant()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getRestaurant()
 			break
 		case "recettes":
-			subMenu = getRecipe()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getRecipe()
 			break
 		case "couture":
-			subMenu = getCouture()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getCouture()
 			break
 		case "notes":
-			subMenu = getNote()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getNote()
 			break
 		default:
-			subMenu = {
-				subTitle: "Erreur",
-				content: (<p>Le sous-smenu demandé n'existe pas</p>)
-			}
+			pageInfo.subTitle = "Erreur"
+			pageInfo.content = (<p>Le sous-menu demandé n'existe pas</p>)
 	}
-	return {
-		...subMenu,
-		icon: "cocktail",
-		title: "Loisirs"
-	}
+	return pageInfo
 }

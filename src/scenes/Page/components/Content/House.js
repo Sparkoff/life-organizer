@@ -1,88 +1,65 @@
 import React from 'react'
 
 
-const getDimension = () => {
-	return {
-		subTitle: "Dimensions des pièces",
-		content: (<p>dims (à implémenter)</p>)
+const getDimension = () =>
+	(<p>dims (à implémenter)</p>)
+
+const getPainting = () =>
+	(<p>ref-peintures (à implémenter)</p>)
+
+const getBed = () =>
+	(<p>literie (à implémenter)</p>)
+
+const getLight = () =>
+	(<p>ampoules (à implémenter)</p>)
+
+const getConsumption = () =>
+	(<p>consos (à implémenter)</p>)
+
+const getCat = () =>
+	(<p>chat (à implémenter)</p>)
+
+const getNote = () =>
+	(<p>notes (à implémenter)</p>)
+
+
+export default (subMenu, menuInfos) => {
+	let pageInfo = {
+		icon: menuInfos.icon,
+		title: menuInfos.title
 	}
-}
-
-const getPainting = () => {
-	return {
-		subTitle: "Références des peintures",
-		content: (<p>ref-peintures (à implémenter)</p>)
-	}
-}
-
-const getBed = () => {
-	return {
-		subTitle: "Literie",
-		content: (<p>literie (à implémenter)</p>)
-	}
-}
-
-const getLight = () => {
-	return {
-		subTitle: "Références des ampoules",
-		content: (<p>ampoules (à implémenter)</p>)
-	}
-}
-
-const getConsumption = () => {
-	return {
-		subTitle: "Relevé des consommations",
-		content: (<p>consos (à implémenter)</p>)
-	}
-}
-
-const getCat = () => {
-	return {
-		subTitle: "Chat",
-		content: (<p>chat (à implémenter)</p>)
-	}
-}
-
-const getNote = () => {
-	return {
-		subTitle: "Notes",
-		content: (<p>notes (à implémenter)</p>)
-	}
-}
-
-
-export default (subMenu) => {
 	switch (subMenu) {
 		case "dims":
-			subMenu = getDimension()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getDimension()
 			break
 		case "ref-peintures":
-			subMenu = getPainting()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getPainting()
 			break
 		case "literie":
-			subMenu = getBed()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getBed()
 			break
 		case "ampoules":
-			subMenu = getLight()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getLight()
 			break
 		case "consos":
-			subMenu = getConsumption()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getConsumption()
 			break
 		case "chat":
-			subMenu = getCat()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getCat()
 			break
 		case "notes":
-			subMenu = getNote()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getNote()
 			break
 		default:
-			subMenu = {
-				subTitle: "Erreur",
-				content: (<p>Le sous-smenu demandé n'existe pas</p>)
-			}
+			pageInfo.subTitle = "Erreur"
+			pageInfo.content = (<p>Le sous-menu demandé n'existe pas</p>)
 	}
-	return {
-		...subMenu,
-		icon: "home",
-		title: "Maison"
-	}
+	return pageInfo
 }

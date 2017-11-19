@@ -12,31 +12,33 @@ import getMyself from './Myself'
 import getBudget from './Budget'
 import getTodo from './Todo'
 
+import { menusBySlug } from '../../../../config/navigation'
+
 
 export default (menu, subMenu) => {
 	switch (menu) {
 		case "maison":
-			return getHouse(subMenu)
+			return getHouse(subMenu, menusBySlug[menu])
 		case "pratique":
-			return getUseful(subMenu)
+			return getUseful(subMenu, menusBySlug[menu])
 		case "jardin":
-			return getOutside(subMenu)
+			return getOutside(subMenu, menusBySlug[menu])
 		case "travaux-entretien":
-			return getMaintenance(subMenu)
+			return getMaintenance(subMenu, menusBySlug[menu])
 		case "inventaire":
-			return getStock(subMenu)
+			return getStock(subMenu, menusBySlug[menu])
 		case "carnet-d-adresses":
-			return getContact(subMenu)
+			return getContact(subMenu, menusBySlug[menu])
 		case "culture":
-			return getCulture(subMenu)
+			return getCulture(subMenu, menusBySlug[menu])
 		case "loisirs":
-			return getEntertainment(subMenu)
+			return getEntertainment(subMenu, menusBySlug[menu])
 		case "perso":
-			return getMyself(subMenu)
+			return getMyself(subMenu, menusBySlug[menu])
 		case "budget":
-			return getBudget(subMenu)
+			return getBudget(subMenu, menusBySlug[menu])
 		case "planification":
-			return getTodo(subMenu)
+			return getTodo(subMenu, menusBySlug[menu])
 		default:
 			return {
 				icon: "close",

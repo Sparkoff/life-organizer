@@ -1,68 +1,51 @@
 import React from 'react'
 
 
-const getBook = () => {
-	return {
-		subTitle: "Livres",
-		content: (<p>livres (à implémenter)</p>)
+const getBook = () =>
+	(<p>livres (à implémenter)</p>)
+
+const getMovie = () =>
+	(<p>films (à implémenter)</p>)
+
+const getTVShow = () =>
+	(<p>series (à implémenter)</p>)
+
+const getConcert = () =>
+	(<p>concerts-spectacles (à implémenter)</p>)
+
+const getNote = () =>
+	(<p>notes (à implémenter)</p>)
+
+
+export default (subMenu, menuInfos) => {
+	let pageInfo = {
+		icon: menuInfos.icon,
+		title: menuInfos.title
 	}
-}
-
-const getMovie = () => {
-	return {
-		subTitle: "Films",
-		content: (<p>films (à implémenter)</p>)
-	}
-}
-
-const getTVShow = () => {
-	return {
-		subTitle: "Séries",
-		content: (<p>series (à implémenter)</p>)
-	}
-}
-
-const getConcert = () => {
-	return {
-		subTitle: "Concerts - Spectacles",
-		content: (<p>concerts-spectacles (à implémenter)</p>)
-	}
-}
-
-const getNote = () => {
-	return {
-		subTitle: "Notes",
-		content: (<p>notes (à implémenter)</p>)
-	}
-}
-
-
-export default (subMenu) => {
 	switch (subMenu) {
 		case "livres":
-			subMenu = getBook()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getBook()
 			break
 		case "films":
-			subMenu = getMovie()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getMovie()
 			break
 		case "series":
-			subMenu = getTVShow()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getTVShow()
 			break
 		case "concerts-spectacles":
-			subMenu = getConcert()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getConcert()
 			break
 		case "notes":
-			subMenu = getNote()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getNote()
 			break
 		default:
-			subMenu = {
-				subTitle: "Erreur",
-				content: (<p>Le sous-smenu demandé n'existe pas</p>)
-			}
+			pageInfo.subTitle = "Erreur"
+			pageInfo.content = (<p>Le sous-menu demandé n'existe pas</p>)
 	}
-	return {
-		...subMenu,
-		icon: "book",
-		title: "Culture"
-	}
+	return pageInfo
 }

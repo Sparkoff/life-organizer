@@ -1,48 +1,37 @@
 import React from 'react'
 
 
-const getSaving = () => {
-	return {
-		subTitle: "Économie",
-		content: (<p>economie (à implémenter)</p>)
+const getSaving = () =>
+	(<p>economie (à implémenter)</p>)
+
+const getExpense = () =>
+	(<p>depenses-fixes (à implémenter)</p>)
+
+const getCasual = () =>
+	(<p>occasionnel (à implémenter)</p>)
+
+
+export default (subMenu, menuInfos) => {
+	let pageInfo = {
+		icon: menuInfos.icon,
+		title: menuInfos.title
 	}
-}
-
-const getExpense = () => {
-	return {
-		subTitle: "Dépenses fixes",
-		content: (<p>depenses-fixes (à implémenter)</p>)
-	}
-}
-
-const getCasual = () => {
-	return {
-		subTitle: "Occasionnel",
-		content: (<p>occasionnel (à implémenter)</p>)
-	}
-}
-
-
-export default (subMenu) => {
 	switch (subMenu) {
 		case "economie":
-			subMenu = getSaving()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getSaving()
 			break
 		case "depenses-fixes":
-			subMenu = getExpense()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getExpense()
 			break
 		case "occasionnel":
-			subMenu = getCasual()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getCasual()
 			break
 		default:
-			subMenu = {
-				subTitle: "Erreur",
-				content: (<p>Le sous-smenu demandé n'existe pas</p>)
-			}
+			pageInfo.subTitle = "Erreur"
+			pageInfo.content = (<p>Le sous-menu demandé n'existe pas</p>)
 	}
-	return {
-		...subMenu,
-		icon: "money",
-		title: "Budget"
-	}
+	return pageInfo
 }

@@ -1,78 +1,58 @@
 import React from 'react'
 
 
-const getBed = () => {
-	return {
-		subTitle: "Literie",
-		content: (<p>literie (à implémenter)</p>)
+const getBed = () =>
+	(<p>literie (à implémenter)</p>)
+
+const getCellar = () =>
+	(<p>cellier (à implémenter)</p>)
+
+const getFreezer = () =>
+	(<p>congelateur (à implémenter)</p>)
+
+const getDrug = () =>
+	(<p>pharmacie (à implémenter)</p>)
+
+const getLiving = () =>
+	(<p>salon (à implémenter)</p>)
+
+const getNote = () =>
+	(<p>notes (à implémenter)</p>)
+
+
+export default (subMenu, menuInfos) => {
+	let pageInfo = {
+		icon: menuInfos.icon,
+		title: menuInfos.title
 	}
-}
-
-const getCellar = () => {
-	return {
-		subTitle: "Cellier",
-		content: (<p>cellier (à implémenter)</p>)
-	}
-}
-
-const getFreezer = () => {
-	return {
-		subTitle: "Congélateur",
-		content: (<p>congelateur (à implémenter)</p>)
-	}
-}
-
-const getDrug = () => {
-	return {
-		subTitle: "Pharmacie",
-		content: (<p>pharmacie (à implémenter)</p>)
-	}
-}
-
-const getLiving = () => {
-	return {
-		subTitle: "Salon",
-		content: (<p>salon (à implémenter)</p>)
-	}
-}
-
-const getNote = () => {
-	return {
-		subTitle: "Notes",
-		content: (<p>notes (à implémenter)</p>)
-	}
-}
-
-
-export default (subMenu) => {
 	switch (subMenu) {
 		case "literie":
-			subMenu = getBed()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getBed()
 			break
 		case "cellier":
-			subMenu = getCellar()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getCellar()
 			break
 		case "congelateur":
-			subMenu = getFreezer()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getFreezer()
 			break
 		case "pharmacie":
-			subMenu = getDrug()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getDrug()
 			break
 		case "salon":
-			subMenu = getLiving()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getLiving()
 			break
 		case "notes":
-			subMenu = getNote()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getNote()
 			break
 		default:
-			subMenu = {
-				subTitle: "Erreur",
-				content: (<p>Le sous-smenu demandé n'existe pas</p>)
-			}
+			pageInfo.subTitle = "Erreur"
+			pageInfo.content = (<p>Le sous-menu demandé n'existe pas</p>)
 	}
-	return {
-		...subMenu,
-		icon: "file text outline",
-		title: "Inventaire"
-	}
+	return pageInfo
 }

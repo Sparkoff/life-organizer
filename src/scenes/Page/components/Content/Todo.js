@@ -1,28 +1,23 @@
 import React from 'react'
 
 
-const getTodo = () => {
-	return {
-		subTitle: "To do list",
-		content: (<p>liste (à implémenter)</p>)
+const getTodo = () =>
+	(<p>liste (à implémenter)</p>)
+
+
+export default (subMenu, menuInfos) => {
+	let pageInfo = {
+		icon: menuInfos.icon,
+		title: menuInfos.title
 	}
-}
-
-
-export default (subMenu) => {
 	switch (subMenu) {
 		case "liste":
-			subMenu = getTodo()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getTodo()
 			break
 		default:
-			subMenu = {
-				subTitle: "Erreur",
-				content: (<p>Le sous-smenu demandé n'existe pas</p>)
-			}
+			pageInfo.subTitle = "Erreur"
+			pageInfo.content = (<p>Le sous-menu demandé n'existe pas</p>)
 	}
-	return {
-		...subMenu,
-		icon: "checked calendar",
-		title: "À planifier / Général"
-	}
+	return pageInfo
 }

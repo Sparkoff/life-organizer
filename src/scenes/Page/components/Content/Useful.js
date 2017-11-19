@@ -1,48 +1,37 @@
 import React from 'react'
 
 
-const getCart = () => {
-	return {
-		subTitle: "À acheter",
-		content: (<p>acheter (à implémenter)</p>)
+const getCart = () =>
+	(<p>acheter (à implémenter)</p>)
+
+const getHoliday = () =>
+	(<p>vacances (à implémenter)</p>)
+
+const getBirthday = () =>
+	(<p>anniversaires (à implémenter)</p>)
+
+
+export default (subMenu, menuInfos) => {
+	let pageInfo = {
+		icon: menuInfos.icon,
+		title: menuInfos.title
 	}
-}
-
-const getHoliday = () => {
-	return {
-		subTitle: "Références des peintures",
-		content: (<p>vacances (à implémenter)</p>)
-	}
-}
-
-const getBirthday = () => {
-	return {
-		subTitle: "Literie",
-		content: (<p>anniversaires (à implémenter)</p>)
-	}
-}
-
-
-export default (subMenu) => {
 	switch (subMenu) {
 		case "acheter":
-			subMenu = getCart()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getCart()
 			break
 		case "vacances":
-			subMenu = getHoliday()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getHoliday()
 			break
 		case "anniversaires":
-			subMenu = getBirthday()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getBirthday()
 			break
 		default:
-			subMenu = {
-				subTitle: "Erreur",
-				content: (<p>Le sous-smenu demandé n'existe pas</p>)
-			}
+			pageInfo.subTitle = "Erreur"
+			pageInfo.content = (<p>Le sous-menu demandé n'existe pas</p>)
 	}
-	return {
-		...subMenu,
-		icon: "pin",
-		title: "Pratique"
-	}
+	return pageInfo
 }

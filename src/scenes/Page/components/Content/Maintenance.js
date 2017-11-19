@@ -1,58 +1,44 @@
 import React from 'react'
 
 
-const getDone = () => {
-	return {
-		subTitle: "Fait",
-		content: (<p>fait (à implémenter)</p>)
+const getDone = () =>
+	(<p>fait (à implémenter)</p>)
+
+const getTodo = () =>
+	(<p>a-faire (à implémenter)</p>)
+
+const getCar = () =>
+	(<p>voiture (à implémenter)</p>)
+
+const getNote = () =>
+	(<p>notes (à implémenter)</p>)
+
+
+export default (subMenu, menuInfos) => {
+	let pageInfo = {
+		icon: menuInfos.icon,
+		title: menuInfos.title
 	}
-}
-
-const getTodo = () => {
-	return {
-		subTitle: "À faire",
-		content: (<p>a-faire (à implémenter)</p>)
-	}
-}
-
-const getCar = () => {
-	return {
-		subTitle: "Voiture",
-		content: (<p>voiture (à implémenter)</p>)
-	}
-}
-
-const getNote = () => {
-	return {
-		subTitle: "Notes",
-		content: (<p>notes (à implémenter)</p>)
-	}
-}
-
-
-export default (subMenu) => {
 	switch (subMenu) {
 		case "fait":
-			subMenu = getDone()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getDone()
 			break
 		case "a-faire":
-			subMenu = getTodo()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getTodo()
 			break
 		case "voiture":
-			subMenu = getCar()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getCar()
 			break
 		case "notes":
-			subMenu = getNote()
+			pageInfo.subTitle = menuInfos.subMenu[subMenu].title
+			pageInfo.content = getNote()
 			break
 		default:
-			subMenu = {
-				subTitle: "Erreur",
-				content: (<p>Le sous-smenu demandé n'existe pas</p>)
-			}
+			pageInfo.subTitle = "Erreur"
+			pageInfo.content = (<p>Le sous-menu demandé n'existe pas</p>)
 	}
-	return {
-		...subMenu,
-		icon: "wrench",
-		title: "Travaux et Entretien"
-	}
+	return pageInfo
 }

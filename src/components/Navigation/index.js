@@ -8,7 +8,8 @@ import SubNav from './components/SubNav'
 
 import { Menu } from 'semantic-ui-react'
 
-import navConfig from '../../config/navigation'
+import appInfos from '../../config/app'
+import { navs } from '../../config/navigation'
 
 
 class Navigation extends Component {
@@ -21,7 +22,7 @@ class Navigation extends Component {
 			<div>
 				<Menu fixed='left' vertical color={'blue'} style={styles}>
 					<Menu.Item header>
-						{navConfig.appName}
+						{appInfos.title}
 					</Menu.Item>
 
 					<Menu.Item
@@ -34,7 +35,7 @@ class Navigation extends Component {
 						Accueil
 					</Menu.Item>
 
-					{navConfig.menus.map((subNav,i) =>
+					{navs.map((subNav,i) =>
 						<SubNav {...subNav} key={subNav.slug}/>
 					)}
 				</Menu>
