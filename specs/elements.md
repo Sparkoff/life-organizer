@@ -87,7 +87,6 @@
 	- [X] Notes
 		- Date
 		- Commentaire
-+ Locations
 + Inventaire
 	- [X] Linge de lit
 		- Pièce

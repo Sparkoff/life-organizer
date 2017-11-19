@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import Header from '../../components/Header'
+import Navigation from '../../components/Navigation'
 import Routes from '../../routes'
 
 import { Container } from 'semantic-ui-react'
@@ -8,16 +8,39 @@ import { Container } from 'semantic-ui-react'
 
 class App extends Component {
 	render() {
+		const styles = {
+			"sideBar": {
+				"position": "fixed",
+				"top": "0px",
+				"bottom": "0px",
+				"left": "0px",
+				"width": "250px",
+				"paddingBottom": "1em",
+				"overflowY": "scroll"
+			},
+			"content": {
+				"marginLeft": "250px",
+				"padding": "20px",
+			    "minWidth": "550px"
+			}
+		}
+
 		return (
 			<div>
-				<Header/>
+				<Container fluid>
+					<Navigation style={styles.sideBar}/>
 
-				<Container fluid style={{ paddingTop: '50px' }}>
-					<Routes/>
+					<div style={styles.content}>
+						<Container fluid>
+							<Routes/>
+						</Container>
+					</div>
+
 				</Container>
 			</div>
 		)
 	}
 }
+
 
 export default App

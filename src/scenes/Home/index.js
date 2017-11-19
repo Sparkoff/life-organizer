@@ -1,20 +1,19 @@
 import React, { Component } from 'react'
 
-import { Container, Header } from 'semantic-ui-react'
+import PageLayout from '../../components/PageLayout'
+
+import appInfos from '../../config/app'
 
 
 class Home extends Component {
 	render() {
 		return (
-			<div>
-				<Container>
-					<Header as='h1' dividing>
-						Méthodes et astuces pour bordélique [repentis]
-					</Header>
-				</Container>
-			</div>
+			<PageLayout icon={appInfos.icon} title={appInfos.title} subTitle={appInfos.subTitle}>
+				<p>À implémenter</p>
+			</PageLayout>
 		)
 	}
 }
+
 
 export default Home
