@@ -14,13 +14,12 @@ import navConfig from '../../config/navigation'
 class Navigation extends Component {
 	render() {
 		const styles = {
-			...this.props.style,
-			"backgroundColor": "white"
+			...this.props.style
 		}
 
 		return (
 			<div>
-				<Menu fixed='left' vertical style={styles}>
+				<Menu fixed='left' vertical color={'blue'} style={styles}>
 					<Menu.Item header>
 						{navConfig.appName}
 					</Menu.Item>

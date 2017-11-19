@@ -20,9 +20,8 @@ class App extends Component {
 			},
 			"content": {
 				"marginLeft": "250px",
-				"paddingLeft": "10px",
-			    "minWidth": "550px",
-			    "maxWidth": "1150px"
+				"padding": "20px",
+			    "minWidth": "550px"
 			}
 		}
 

@@ -9,7 +9,7 @@ const navigation = (state, action) => {
 	let newState = Object.assign({}, defaultState, state)
 
 	switch (action.type) {
-		case 'NAVIGATE_TO':
+		case "NAVIGATE_TO":
 			newState.activeItem = action.activeItem
 			break
 		default:

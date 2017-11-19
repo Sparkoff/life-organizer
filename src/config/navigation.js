@@ -4,6 +4,7 @@ export default {
 	menus: [{
 		title: "Maison",
 		slug: "maison",
+		icon: "home",
 		subMenu: [{
 			title: "Dimensions",
 			slug: "dims"
@@ -29,6 +30,7 @@ export default {
 	}, {
 		title: "Pratique",
 		slug: "pratique",
+		icon: "pin",
 		subMenu: [{
 			title: "À acheter",
 			slug: "acheter"
@@ -42,6 +44,7 @@ export default {
 	}, {
 		title: "Espace extérieur",
 		slug: "jardin",
+		icon: "tree",
 		subMenu: [{
 			title: "Plantations",
 			slug: "plantations"
@@ -55,6 +58,7 @@ export default {
 	}, {
 		title: "Travaux et Entretien",
 		slug: "travaux-entretien",
+		icon: "wrench",
 		subMenu: [{
 			title: "Fait",
 			slug: "fait"
@@ -71,6 +75,7 @@ export default {
 	}, {
 		title: "Inventaire",
 		slug: "inventaire",
+		icon: "file text outline",
 		subMenu: [{
 			title: "Literie",
 			slug: "literie"
@@ -78,7 +83,7 @@ export default {
 			title: "Cellier",
 			slug: "cellier"
 		}, {
-			title: "Congelateur",
+			title: "Congélateur",
 			slug: "congelateur"
 		}, {
 			title: "Pharmacie",
@@ -93,6 +98,7 @@ export default {
 	}, {
 		title: "Carnet d'adresses",
 		slug: "carnet-d-adresses",
+		icon: "address book outline",
 		subMenu: [{
 			title: "Annuaire",
 			slug: "annuaire"
@@ -100,6 +106,7 @@ export default {
 	}, {
 		title: "Culture",
 		slug: "culture",
+		icon: "book",
 		subMenu: [{
 			title: "Livres",
 			slug: "livres"
@@ -119,6 +126,7 @@ export default {
 	}, {
 		title: "Loisirs",
 		slug: "loisirs",
+		icon: "cocktail",
 		subMenu: [{
 			title: "Restos",
 			slug: "restos"
@@ -135,6 +143,7 @@ export default {
 	}, {
 		title: "Perso",
 		slug: "perso",
+		icon: "user",
 		subMenu: [{
 			title: "Résolutions",
 			slug: "resolutions"
@@ -145,6 +154,7 @@ export default {
 	}, {
 		title: "Budget",
 		slug: "budget",
+		icon: "money",
 		subMenu: [{
 			title: "Économie",
 			slug: "economie"
@@ -158,6 +168,7 @@ export default {
 	}, {
 		title: "À planifier / Général",
 		slug: "planification",
+		icon: "checked calendar",
 		subMenu: [{
 			title: "To do list",
 			slug: "liste"

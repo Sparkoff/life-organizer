@@ -1,6 +1,6 @@
 export const navigateTo = menu => {
 	return {
-		type: 'NAVIGATE_TO',
+		type: "NAVIGATE_TO",
 		activeItem: menu
 	}
 }

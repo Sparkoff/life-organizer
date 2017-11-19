@@ -2,7 +2,7 @@ const getLocation = () => {
 	try {
 		return window.location.pathname
 	} catch (e) {
-		return ''
+		return ""
 	}
 }
 export const currentLocation = getLocation
@@ -10,11 +10,11 @@ export const currentLocation = getLocation
 
 const getPath = () => {
 	try {
-		var path = getLocation().split('/')
+		var path = getLocation().split("/")
 		path.shift()
 		return path
 	} catch (e) {
-		return ''
+		return ""
 	}
 }
 export const currentPath = getPath
@@ -22,9 +22,9 @@ export const currentPath = getPath
 
 const getSlug = () => {
 	try {
-		return getPath().join('.')
+		return getPath().join(".")
 	} catch (e) {
-		return ''
+		return ""
 	}
 }
 export const currentSlug = getSlug
