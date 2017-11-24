@@ -2,15 +2,15 @@ import React from 'react'
 import { render } from 'react-dom'
 
 import { Provider } from 'react-redux'
-import store from './store'
+import store from 'store'
 
 import { BrowserRouter } from 'react-router-dom'
 
-import registerServiceWorker from './services/registerServiceWorker'
+import registerServiceWorker from 'services/registerServiceWorker'
 
-import App from './scenes/App'
+import App from 'scenes/App'
 
-import './style.css'
+import 'style.css'
 import 'semantic-ui-css/semantic.min.css'
 
 

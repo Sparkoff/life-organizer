@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import PageLayout from '../../components/PageLayout'
+import PageLayout from 'components/PageLayout'
 import getPage from './components/Content'
 
 

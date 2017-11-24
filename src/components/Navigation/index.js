@@ -8,8 +8,8 @@ import SubNav from './components/SubNav'
 
 import { Menu } from 'semantic-ui-react'
 
-import appInfos from '../../config/app'
-import { navs } from '../../config/navigation'
+import appInfos from 'config/app'
+import { navs } from 'config/navigation'
 
 
 class Navigation extends Component {
@@ -20,7 +20,7 @@ class Navigation extends Component {
 
 		return (
 			<div>
-				<Menu fixed='left' vertical color={'blue'} style={styles}>
+				<Menu fixed='left' vertical style={styles}>
 					<Menu.Item header>
 						{appInfos.title}
 					</Menu.Item>

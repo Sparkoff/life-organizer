@@ -13,8 +13,8 @@
 		- Nombre coussins
 	- [X] Références des ampoules
 		- Pièce
-		- Nombre
 		- Référence
+		- Nombre
 	- [X] Relevés des consommations
 		- Date
 		- Électricité HP
@@ -23,7 +23,7 @@
 		- Gaz
 	- [X] Chat
 		- Quoi
-		- Par quoi
+		- Par qui
 		- Prévue le
 		- Fait le
 	- [X] Notes
@@ -33,7 +33,7 @@
 	- [X] À acheter
 		- Type
 		- Quoi
-		- Personne
+		- Pour qui
 		- Coût
 		- Acheté le
 	- [X] À emporter en vacances
@@ -73,8 +73,8 @@
 		- Prochain rendez-vous
 		- Note
 	- [X] À faire dans la maison
-		- Quoi
 		- Quand
+		- Quoi
 		- Par qui
 		- Fait le
 		- Coût

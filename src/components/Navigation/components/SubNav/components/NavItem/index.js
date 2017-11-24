@@ -10,6 +10,11 @@ import { Menu } from 'semantic-ui-react'
 class NavItem extends Component {
 	render() {
 		const { path, name, activeItem, title } = this.props
+		let styles = {}
+
+		if (activeItem === name) {
+			styles.backgroundColor = "#A4E9FF"
+		}
 
 		return (
 			<Menu.Item
@@ -18,6 +23,7 @@ class NavItem extends Component {
 				name={name}
 				active={activeItem === name}
 				onClick={() => this.props.onNavigateTo(name)}
+				style={{...styles}}
 			>
 				{title}
 			</Menu.Item>

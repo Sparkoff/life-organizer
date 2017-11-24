@@ -12,7 +12,7 @@ import getMyself from './Myself'
 import getBudget from './Budget'
 import getTodo from './Todo'
 
-import { menusBySlug } from '../../../../config/navigation'
+import { menusBySlug } from 'config/navigation'
 
 
 export default (menu, subMenu) => {

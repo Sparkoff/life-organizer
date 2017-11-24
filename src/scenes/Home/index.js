@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
-import PageLayout from '../../components/PageLayout'
+import PageLayout from 'components/PageLayout'
 
-import appInfos from '../../config/app'
+import appInfos from 'config/app'
 
 
 class Home extends Component {

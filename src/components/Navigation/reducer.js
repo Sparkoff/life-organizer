@@ -1,4 +1,4 @@
-import { currentSlug } from '../../services/location'
+import { currentSlug } from 'services/location'
 
 
 const defaultState = {
