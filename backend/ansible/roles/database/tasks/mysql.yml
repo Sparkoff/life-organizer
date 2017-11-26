@@ -1,3 +1,16 @@
 ---
 - name: Install MySQL
   apt: name=mysql-server state=present
+
+- name: Install Python-MySQL
+  apt: name=python-mysqldb state=present
+
+- name: Create database
+  mysql_db: db=life-organizer state=present
+
+- name: Create database user
+  mysql_user:
+    name=www-data
+    password=www-data
+    priv=*.*:ALL
+    state=present

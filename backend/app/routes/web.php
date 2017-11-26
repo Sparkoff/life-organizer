@@ -15,6 +15,14 @@ $router->get('/', function () use ($router) {
     return "Hello World!";
 });
 
+$router->get('/php', function () use ($router) {
+    return phpinfo();
+});
+
 $router->get('/version', function () use ($router) {
     return $router->app->version();
+});
+
+$router->get('/key', function() {
+    return str_random(32);
 });
