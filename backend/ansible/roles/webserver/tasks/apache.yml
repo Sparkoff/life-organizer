@@ -1,0 +1,32 @@
+---
+- name: Install Apache 2
+  apt: name=apache2 state=present
+
+- name: Enabled mod_rewrite
+  apache2_module:
+    name: rewrite
+    state: present
+  notify:
+    - Reload Apache 2
+
+- name: Copy across new virtual host
+  template:
+    src=virtual-hosts.conf.j2
+    dest=/etc/apache2/sites-available/life-organizer-api.conf
+  notify:
+    - Reload Apache 2
+
+- name: Remove default virtual host
+  file:
+    path=/etc/apache2/sites-enabled/000-default.conf
+    state=absent
+  notify:
+    - Reload Apache 2
+
+- name: Enable new life-organizer-api virtual host
+  file:
+    src=/etc/apache2/sites-available/life-organizer-api.conf
+    dest=/etc/apache2/sites-enabled/life-organizer-api.conf
+    state=link
+  notify:
+    - Reload Apache 2

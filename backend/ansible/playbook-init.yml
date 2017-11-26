@@ -1,0 +1,14 @@
+---
+- hosts: life-organizer
+  become: true
+  become_user: root
+  become_method: sudo
+  gather_facts: False
+
+  vars:
+    ssh_user: "{{ ansible_user | default(ansible_ssh_user, true) }}"
+
+  pre_tasks:
+    - name: Install Python 2.7
+      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+    - setup: # aka gather_facts

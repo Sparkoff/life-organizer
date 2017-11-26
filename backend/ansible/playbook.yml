@@ -1,0 +1,19 @@
+---
+- import_playbook: playbook-init.yml
+
+- hosts: life-organizer
+  become: true
+  become_user: root
+  become_method: sudo
+
+  vars:
+    document_root: /vagrant/life-organizer/backlog/public
+
+  pre_tasks:
+    - name: update APT cache
+      apt: update_cache=yes
+
+  roles:
+    - webserver
+    - database
+    - devTools
