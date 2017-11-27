@@ -1,2 +1,4 @@
 ---
 - import_tasks: composer.yml
+- import_tasks: node.yml
+- import_tasks: tools.yml

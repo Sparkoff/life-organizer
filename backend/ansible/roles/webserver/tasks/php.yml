@@ -13,4 +13,5 @@
     - php-zip
     - php-xml
     - php-mbstring
+    - php-common
     - php-mysql
