@@ -1,0 +1,3 @@
+---
+- name: Reload Apache 2
+  service: name=apache2 state=reloaded

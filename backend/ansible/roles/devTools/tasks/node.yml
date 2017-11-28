@@ -1,0 +1,21 @@
+---
+- name: Download Node
+  get_url:
+    url: https://deb.nodesource.com/setup_8.x
+    dest: /tmp/nodeInstaller
+
+- name: Run Node setup
+  shell: cat /tmp/nodeInstaller | sudo -E bash -
+  args:
+    creates: /usr/bin/node
+
+- name: Install Node
+  apt: name=nodejs state=present
+
+- name: Install Node modules
+  npm: name={{ item }} state=present global=yes
+  with_items:
+    - npm
+    - yarn
+    - gulp
+    - webpack
