@@ -33,9 +33,7 @@ class TodoController extends Controller
         ])->first();
 
         if (empty($todoElement)) {
-            return response()->json({
-                'message': "No element matching category:$category and id:$id."
-            }, 404);
+            return response()->json(['message' => "No element matching category:$category and id:$id."], 404);
         }
 
         return response()->json($todoElement, 200);
@@ -55,9 +53,7 @@ class TodoController extends Controller
         }
 
         if (empty($inputs)) {
-            return response()->json({
-                'message': "Validation error: no parameter given."
-            }, 400);
+            return response()->json(['message' => "Validation error: no parameter given."], 400);
         }
 
         $rules = [
@@ -75,10 +71,10 @@ class TodoController extends Controller
         $validator = \Validator::make($inputs, $rules, $messages);
 
         if ($validator->fails()) {
-            return response()->json({
-                'message': "Validation errors in your request",
-                'errors': $validator->errors()->all()
-            }, 400);
+            return response()->json([
+                'message' => "Validation errors in your request",
+                'errors' => $validator->errors()->all()
+            ], 400);
         } else {
             $result = Todo::create(array_merge(
 				$inputs,
@@ -86,9 +82,7 @@ class TodoController extends Controller
 			));
 
             return response()
-                    ->json({
-                        'message': "The element was created successfully."
-                    }, 201)
+                    ->json(['message' => "The element was created successfully."], 201)
                     ->header('Location', "/todos/$category/$result->id");
         }
     }
@@ -101,9 +95,7 @@ class TodoController extends Controller
         ])->first();
 
         if (empty($todoElement)) {
-            return response()->json({
-                'message': "No element matching category:$category and id:$id."
-            }, 404);
+            return response()->json(['message' => "No element matching category:$category and id:$id."], 404);
         }
 
 		$inputs = [];
@@ -130,9 +122,7 @@ class TodoController extends Controller
         }
 
         if (empty($inputs)) {
-            return response()->json({
-                'message': "Validation error: no parameter given."
-            }, 400);
+            return response()->json(['message' => "Validation error: no parameter given."], 400);
         }
 
         $rules = [
@@ -155,10 +145,10 @@ class TodoController extends Controller
         $validator = \Validator::make($inputs, $rules, $messages);
 
         if ($validator->fails()) {
-            return response()->json({
-                'message': "Validation errors in your request",
-                'errors': $validator->errors()->all()
-            }, 400);
+            return response()->json([
+                'message' => "Validation errors in your request",
+                'errors' => $validator->errors()->all()
+            ], 400);
         } else {
             foreach ($inputs as $key => $value) {
                 $todoElement[$key] = $value;
@@ -178,9 +168,7 @@ class TodoController extends Controller
         ])->first();
 
         if (empty($todoElement)) {
-            return response()->json({
-                'message': "No element matching category:$category and id:$id."
-            }, 404);
+            return response()->json(['message' => "No element matching category:$category and id:$id."], 404);
         }
 
         $currentDate = DateHelper::currentDate();
@@ -201,9 +189,7 @@ class TodoController extends Controller
         ])->first();
 
         if (empty($todoElement)) {
-            return response()->json({
-                'message': "No element matching category:$category and id:$id."
-            }, 404);
+            return response()->json(['message' => "No element matching category:$category and id:$id."], 404);
         }
 
         $currentDate = DateHelper::currentDate();
@@ -224,9 +210,7 @@ class TodoController extends Controller
         ])->first();
 
         if (empty($todoElement)) {
-            return response()->json({
-                'message': "No element matching category:$category and id:$id."
-            }, 404);
+            return response()->json(['message' => "No element matching category:$category and id:$id."], 404);
         }
 
         $todoElement->delete();
