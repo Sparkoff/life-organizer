@@ -8,6 +8,7 @@
 
   vars:
     document_root: /vagrant/app/public
+    project_name: life_organizer
 
   pre_tasks:
     - name: update APT cache

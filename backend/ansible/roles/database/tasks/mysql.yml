@@ -6,11 +6,11 @@
   apt: name=python-mysqldb state=present
 
 - name: Create database
-  mysql_db: db=life-organizer state=present
+  mysql_db: db={{ project_name }} state=present
 
 - name: Create database user
   mysql_user:
-    name=www-data
-    password=www-data
+    name=ubuntu
+    password=ubuntu
     priv=*.*:ALL
     state=present

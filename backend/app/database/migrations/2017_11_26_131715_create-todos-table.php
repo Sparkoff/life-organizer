@@ -19,11 +19,14 @@ class CreateTodosTable extends Migration
 			$table->string('category', 20);
 			$table->string('title', 100);
 
-			$table->timestamp('created_at')->useCurrent();
-			$table->timestamp('updated_at')->useCurrent();
-			$table->timestamp('due_at');
-			$table->timestamp('done_at');
-			$table->timestamp('delete_at');
+            $table->boolean('done');
+			$table->boolean('deleted');
+
+			$table->dateTime('created_at');
+			$table->dateTime('updated_at');
+			$table->dateTime('due_at');
+			$table->dateTime('done_at');
+			$table->dateTime('deleted_at');
 
 			$table->text('comment');
         });

@@ -28,7 +28,7 @@
 - name: Copy across new virtual host
   template:
     src=virtual-hosts.conf.j2
-    dest=/etc/apache2/sites-available/life-organizer-api.conf
+    dest=/etc/apache2/sites-available/{{ project_name }}.conf
   notify:
     - Reload Apache 2
 
@@ -39,10 +39,10 @@
   notify:
     - Reload Apache 2
 
-- name: Enable new life-organizer-api virtual host
+- name: Enable new {{ project_name }} virtual host
   file:
-    src=/etc/apache2/sites-available/life-organizer-api.conf
-    dest=/etc/apache2/sites-enabled/life-organizer-api.conf
+    src=/etc/apache2/sites-available/{{ project_name }}.conf
+    dest=/etc/apache2/sites-enabled/{{ project_name }}.conf
     state=link
   notify:
     - Reload Apache 2
