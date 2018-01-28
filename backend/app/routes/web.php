@@ -12,29 +12,48 @@
 */
 
 $router->get('/', function () use ($router) {
-    return "Hello World!";
+    return response()->json(['message' => "Life-Organizer API. Authentication required for full-access services."], 200);
 });
 
-$todoCategories = [
-	"house",
-	"maintenance",
-	"stock",
-	"culture",
-	"entertainment",
-	"global"
-];
-$router->group(
-	['prefix' => 'todos/{category:' . implode('|', $todoCategories) . '}'],
-	function () use ($router) {
-		$router->get('','TodoController@read');
-		$router->get('{id:[1-9]\d*}','TodoController@readById');
-		$router->post('','TodoController@create');
-		$router->patch('{id:[1-9]\d*}','TodoController@update');
-		$router->patch('{id:[1-9]\d*}/done','TodoController@done');
-        $router->delete('{id:[1-9]\d*}','TodoController@delete');
-		$router->delete('{id:[1-9]\d*}/remove','TodoController@remove');
-	}
-);
+
+$router->get('users','UserController@read');
+$router->post('users','UserController@create');
+$router->get('token','UserController@createToken');
+
+$router->group(['middleware' => 'auth'], function () use ($router) {
+
+	$router->group(
+		['prefix' => 'users'],
+		function () use ($router) {
+			$router->get('{id:[1-9]\d*}','UserController@readById');
+			// $router->patch('{id:[1-9]\d*}','UserController@update');
+			// $router->delete('{id:[1-9]\d*}','UserController@delete');
+			// $router->delete('{id:[1-9]\d*}/remove','UserController@remove');
+		}
+	);
+
+	$todoCategories = [
+		"house",
+		"maintenance",
+		"stock",
+		"culture",
+		"entertainment",
+		"global"
+	];
+	$router->group(
+		['prefix' => 'todos/{category:' . implode('|', $todoCategories) . '}'],
+		function () use ($router) {
+			$router->get('','TodoController@read');
+			$router->get('{id:[1-9]\d*}','TodoController@readById');
+			$router->post('','TodoController@create');
+			$router->patch('{id:[1-9]\d*}','TodoController@update');
+			$router->patch('{id:[1-9]\d*}/done','TodoController@done');
+	        $router->delete('{id:[1-9]\d*}','TodoController@delete');
+			$router->delete('{id:[1-9]\d*}/remove','TodoController@remove');
+		}
+	);
+
+});
 
 
 /*
@@ -46,13 +65,13 @@ $router->group(
 */
 
 $router->group(['prefix' => 'dev'], function () use ($router) {
+
 	$router->get('php', function () use ($router) {
-	    return phpinfo();
+		phpinfo();
 	});
 	$router->get('version', function () use ($router) {
-	    return $router->app->version();
+		return response()->json(['message' => $router->app->version()], 200);
 	});
-	$router->get('key', function() {
-	    return str_random(32);
-	});
+	$router->get('key','DevController@randomKey');
+
 });

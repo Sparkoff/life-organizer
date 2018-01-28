@@ -8,7 +8,7 @@ use Validator;
 
 use App\Helpers\DateHelper;
 
-use App\Todo;
+use App\Models\Todo;
 
 
 class TodoController extends Controller
@@ -16,7 +16,10 @@ class TodoController extends Controller
 
 	public function read($category)
     {
-        $todoElements = Todo::where('category', $category)->get();
+        $todoElements = Todo::where([
+			['category', $category],
+			['deleted', false]
+		])->get();
 
         return response()
 				->json($todoElements, 200)
@@ -29,7 +32,8 @@ class TodoController extends Controller
     {
         $todoElement = Todo::where([
             ['id', $id],
-            ['category', $category]
+            ['category', $category],
+			['deleted', false]
         ])->first();
 
         if (empty($todoElement)) {
@@ -91,7 +95,8 @@ class TodoController extends Controller
     {
         $todoElement = Todo::where([
             ['id', $id],
-            ['category', $category]
+            ['category', $category],
+			['deleted', false]
         ])->first();
 
         if (empty($todoElement)) {
@@ -164,7 +169,8 @@ class TodoController extends Controller
     {
         $todoElement = Todo::where([
             ['id', $id],
-            ['category', $category]
+            ['category', $category],
+			['deleted', false]
         ])->first();
 
         if (empty($todoElement)) {
@@ -185,7 +191,8 @@ class TodoController extends Controller
     {
         $todoElement = Todo::where([
             ['id', $id],
-            ['category', $category]
+            ['category', $category],
+			['deleted', false]
         ])->first();
 
         if (empty($todoElement)) {
