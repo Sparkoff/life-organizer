@@ -1,6 +1,8 @@
 ---
 - name: Install Apache 2
-  apt: name=apache2 state=present
+  apt:
+    name: apache2
+    state: present
 
 - name: Enabled mod_rewrite
   apache2_module:
@@ -11,38 +13,38 @@
 
 - name: Change Apache 2 user
   lineinfile:
-    dest=/etc/apache2/envvars
-    regexp="^export APACHE_RUN_USER"
-    line="export APACHE_RUN_USER=ubuntu"
+    dest: /etc/apache2/envvars
+    regexp: "^export APACHE_RUN_USER"
+    line: "export APACHE_RUN_USER=ubuntu"
   notify:
     - Reload Apache 2
 
 - name: Change Apache 2 group
   lineinfile:
-    dest=/etc/apache2/envvars
-    regexp="^export APACHE_RUN_GROUP"
-    line="export APACHE_RUN_GROUP=ubuntu"
+    dest: /etc/apache2/envvars
+    regexp: "^export APACHE_RUN_GROUP"
+    line: "export APACHE_RUN_GROUP=ubuntu"
   notify:
     - Reload Apache 2
 
 - name: Copy across new virtual host
   template:
-    src=virtual-hosts.conf.j2
-    dest=/etc/apache2/sites-available/{{ project_name }}.conf
+    src: virtual-hosts.conf.j2
+    dest: /etc/apache2/sites-available/{{ project_name }}.conf
   notify:
     - Reload Apache 2
 
 - name: Remove default virtual host
   file:
-    path=/etc/apache2/sites-enabled/000-default.conf
-    state=absent
+    path: /etc/apache2/sites-enabled/000-default.conf
+    state: absent
   notify:
     - Reload Apache 2
 
 - name: Enable new {{ project_name }} virtual host
   file:
-    src=/etc/apache2/sites-available/{{ project_name }}.conf
-    dest=/etc/apache2/sites-enabled/{{ project_name }}.conf
-    state=link
+    src: /etc/apache2/sites-available/{{ project_name }}.conf
+    dest: /etc/apache2/sites-enabled/{{ project_name }}.conf
+    state: link
   notify:
     - Reload Apache 2

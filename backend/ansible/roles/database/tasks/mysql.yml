@@ -1,16 +1,22 @@
 ---
 - name: Install MySQL
-  apt: name=mysql-server state=present
+  apt:
+    name: mysql-server
+    state: present
 
 - name: Install Python-MySQL
-  apt: name=python-mysqldb state=present
+  apt:
+    name: python-mysqldb
+    state: present
 
 - name: Create database
-  mysql_db: db={{ project_name }} state=present
+  mysql_db:
+    db: "{{ project_name }}"
+    state: present
 
 - name: Create database user
   mysql_user:
-    name=ubuntu
-    password=ubuntu
-    priv=*.*:ALL
-    state=present
+    name: ubuntu
+    password: ubuntu
+    priv: "*.*:ALL"
+    state: present
