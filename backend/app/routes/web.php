@@ -16,15 +16,18 @@ $router->get('/', function () use ($router) {
 });
 
 
-$router->get('users','UserController@read');
+//$router->get('users','UserController@read');
 $router->post('users','UserController@create');
-$router->get('token','UserController@createToken');
+$router->post('auth','TokenController@create');
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
+
+	$router->delete('leave','TokenController@delete');
 
 	$router->group(
 		['prefix' => 'users'],
 		function () use ($router) {
+			$router->get('','UserController@read');
 			$router->get('{id:[1-9]\d*}','UserController@readById');
 			// $router->patch('{id:[1-9]\d*}','UserController@update');
 			// $router->delete('{id:[1-9]\d*}','UserController@delete');

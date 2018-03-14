@@ -4,15 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Validator;
 
 use App\Helpers\DateHelper;
 
 use App\Models\User;
 
 use Log;
-use DateTime;
-use DateTimezone;
 
 
 class UserController extends Controller
@@ -20,136 +17,88 @@ class UserController extends Controller
 
 	public function read()
     {
-        $userElements = User::all();
+        //$users = User::with('tokens')->find(1);
+        //$users = User::find(1)->tokens;
+        //$users = User::all();
+		$users = [
+            'with_select' => User::with(['tokens' => function ($query) {
+				$query->select('id', 'user_id', 'token', 'expire_at');
+			}])->select('id', 'email', 'name')->get(),
+			'with_where_token' => User::with(['tokens' => function ($query) {
+				$query->where('token', 'HgvFkJpGneCcLMnX.GQG');
+			}])->select('id', 'email', 'name')->get(),
+			'with_whereHas' => User::whereHas('tokens', function ($q) {
+				$q->where('token', 'HgvFkJpGneCcLMnX.GQG');
+			})->where('email', 'admin@gmail.com')->select('id', 'email', 'name')->first(),
+            'with_find' => User::with('tokens')->find(1),
+            'with_get' => User::with('tokens')->get(),
+    		//'with_where' => User::with('tokens')->where('tokens.token', 'HgvFkJpGneCcLMnX.GQG')->toSql(),
+            'find_allToken' => User::find(1)->tokens,
+            'find_token' => User::find(1)->tokens()->where('token', 'HgvFkJpGneCcLMnX.GQG')->first(),
+            'find_token1' => User::find(1)->tokens()->where('token', 'HgvFkJpGne4cLMnX.GQG')->first(),
+			'find_token2' => User::find(2)->tokens()->where('token', 'HgvFkJpGneCcLMnX.GQG')->first(),
+			'all' => User::all()
+		];
 
         return response()
-				->json($userElements, 200)
-				->header('Pagination-Count', count($userElements))
+				->json($users, 200)
+				->header('Pagination-Count', count($users))
 			    ->header('Pagination-Page', 1)
-			    ->header('Pagination-Limit', count($userElements));
+			    ->header('Pagination-Limit', count($users));
     }
 
     public function readById($id)
     {
-        $userElement = User::where([
+        $user = User::where([
 			['id', $id],
 			['deleted', false]
 		])->first();
 
-        if (empty($userElement)) {
-            return response()->json(['message' => "No user matching id:$id."], 404);
+        if (empty($user)) {
+            return $this->clientError("No user matching id:{$id}.", 404);
         }
 
-        return response()->json($userElement, 200);
+        return response()->json($user, 200);
     }
 
     public function create(Request $request)
     {
-		$inputs = [];
-        if ($request->input('email') != null) {
-            $inputs['email'] = $request->input('email');
-        }
-        if ($request->input('password') != null) {
-            $inputs['password'] = $request->input('password');
-        }
-        if ($request->input('password_confirmation') != null) {
-            $inputs['password_confirmation'] = $request->input('password_confirmation');
-        }
-        if ($request->input('name') != null) {
-            $inputs['name'] = $request->input('name');
-        }
+		$inputs = $this->filterInputs($request, [
+			'email',
+			'password',
+			'password_confirmation',
+			'name'
+		]);
 
         if (empty($inputs)) {
-            return response()->json(['message' => "Validation error: no parameter given."], 400);
+            return $this->clientError("Validation error: no parameter given.", 400);
         }
 
-        $rules = [
-			'email' => 'required|email|max:30',
-            'password' => 'required|confirmed|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[_@#&!?.:=+-*<>$%§]).+$/',
-            'name' => 'nullable|max:50'
-        ];
-        $messages = [
-			'email.required' => 'email is required.',
-			'email.email' => 'email should match email pattern.',
-			'email.max' => 'email must not exceed 20 characters.',
-			'password.required' => 'password is required.',
-			'password.confirmed' => 'password confirmation do not match.',
-            'password.min' => 'password should use at least 8 characters.',
-            'password.regex' => 'password contain at least one upper/lowercase letter, one number and one special char among _@#&!?.:=+-*<>$%§.',
-			'name.max' => 'name must not exceed 50 characters.'
-        ];
+        $sanity = $this->sanityCheck($inputs, [
+			'email' => "user-email:required|email|max",
+			'password' => "user-password:required|confirmed|min|regex",
+			'name' => "user-name:nullable|max"
+		]);
 
-        $validator = \Validator::make($inputs, $rules, $messages);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => "Validation errors in your request",
-                'errors' => $validator->errors()->all()
-            ], 400);
+        if (is_array($sanity)) {
+            return $this->clientError($sanity, 400);
         } else {
-            $userElement = User::where('email', $inputs['email'])->first();
-
-            if (!empty($userElement)) {
-                return response()->json(['message' => 'User with email:' . $inputs['email'] . ' already exist.'], 409);
+            if (User::where([
+                ['email', $inputs['email']],
+                ['deleted', false]
+            ])->exists()) {
+                return $this->clientError("User with email:{$inputs['email']} already exist.", 409);
             }
+
+            unset($inputs['password_confirmation']);
+            $inputs['password'] = password_hash($inputs['password'], PASSWORD_DEFAULT);
 
             $result = User::create($inputs);
 
             return response()
                     ->json(['message' => "The element was created successfully."], 201)
-                    ->header('Location', "/users/$result->id");
+                    ->header('Location', "/users/{$result->id}");
         }
-    }
-
-    public function createToken(Request $request)
-	{
-		$inputs = [];
-        /*if ($request->input('email') != null) {
-            $inputs['email'] = $request->input('email');
-        } else {
-            return response()->json(['message' => "Missing email."], 400);
-        }
-        if ($request->input('password') != null) {
-            $inputs['password'] = $request->input('password');
-        } else {
-            return response()->json(['message' => "Missing password."], 400);
-        }*/
-		$inputs['email'] = "admin@gmail.com";
-		$inputs['password'] = "$2y$10$9h7NibONlaer21xJicYg4.en5FNWgnkv7RYZULVfmTpGTxclZo7ma";
-
-        $userElement = User::where([
-			['email', $inputs['email']],
-			//['password', $inputs['password']],
-			['deleted', false]
-		])->first();
-
-		Log::info('Showing user: '.$userElement->id);
-		Log::info('Password hashed: '.$inputs['password']);
-		Log::info('Password verification: '.password_verify('adminPass', $inputs['password']) ? 'true' : 'false');
-
-        if (empty($userElement)) {
-            return response()->json(['message' => "No user matching email and password."], 404);
-        }
-
-    	Log::info('Token: '.sha1("toto", true));
-		Log::info('date: '.(new DateTime())->format("Y-m-d H:i:s"));
-        Log::info('date UTC: '.(new DateTime(null, new DateTimezone("UTC")))->format("Y-m-d H:i:s"));
-        Log::info('date Paris: '.(new DateTime(null, new DateTimezone("Europe/Paris")))->format("Y-m-d H:i:s"));
-		$date = (new DateTime(null, new DateTimezone("UTC")))->format("Y-m-d H:i:s");
-		$dateUTC = new DateTime($date);
-		$dateUTC->setTimezone(new DateTimezone("Europe/Paris"));
-        Log::info('date UTC to Paris: '.$dateUTC->format("Y-m-d H:i:s"));
-
-		/*$token = [
-			'token' => sha1("toto", true),
-			'expire_at' => ??
-		];*/
-
-        return response()->json($userElement, 200);
-    }
-
-    public function deleteToken($id) {
-
     }
 
 }

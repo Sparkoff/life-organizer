@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Model;
+
 use Illuminate\Auth\Authenticatable;
 use Laravel\Lumen\Auth\Authorizable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
@@ -34,7 +36,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
 
 	// DEFINE RELATIONSHIPS
-	public function token() {
-        return $this->hasMany('Token');
+	public function tokens() {
+        return $this->hasMany('App\Models\Token');
     }
 }

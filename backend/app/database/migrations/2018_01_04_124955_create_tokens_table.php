@@ -19,7 +19,12 @@ class CreateTokensTable extends Migration
 			$table->integer('user_id');
 			$table->string('token', 20)->unique();
 
+			$table->boolean('deleted');
+
+			$table->dateTime('created_at');
+			$table->dateTime('updated_at');
 			$table->dateTime('expire_at');
+			$table->dateTime('deleted_at');
         });
     }
 

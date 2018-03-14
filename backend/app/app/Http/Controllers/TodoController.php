@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Validator;
 
 use App\Helpers\DateHelper;
 
@@ -37,7 +36,7 @@ class TodoController extends Controller
         ])->first();
 
         if (empty($todoElement)) {
-            return response()->json(['message' => "No element matching category:$category and id:$id."], 404);
+            return $this->$this->clientError("No element matching category:{$category} and id:{$id}.", 404);
         }
 
         return response()->json($todoElement, 200);
@@ -45,40 +44,24 @@ class TodoController extends Controller
 
     public function create(Request $request, $category)
     {
-		$inputs = [];
-        if ($request->input('title') != null) {
-            $inputs['title'] = $request->input('title');
-        }
-        if ($request->input('comment') != null) {
-            $inputs['comment'] = $request->input('comment');
-        }
-        if ($request->input('due_at') != null) {
-            $inputs['due_at'] = $request->input('due_at');
-        }
+		$inputs = $this->filterInputs($request, [
+			'title',
+			'comment',
+			'due_at'
+		]);
 
         if (empty($inputs)) {
-            return response()->json(['message' => "Validation error: no parameter given."], 400);
+            return $this->clientError("Validation error: no parameter given.", 400);
         }
 
-        $rules = [
-            'title' => 'required|max:100',
-            'comment' => 'required',
-            'due_at' => 'regex:/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/'
-        ];
-        $messages = [
-			'title.required' => 'title is required.',
-            'title.max' => 'title must not exceed 100 characters.',
-            'comment.required' => 'comment is required.',
-			'due_at.regex' => 'due_at should match dateTime format.'
-        ];
+		$sanity = $this->sanityCheck($inputs, [
+			'title' => "todo-title:required|max",
+			'comment' => "todo-comment:required",
+			'due_at' => "todo-due_at:regex"
+		]);
 
-        $validator = \Validator::make($inputs, $rules, $messages);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => "Validation errors in your request",
-                'errors' => $validator->errors()->all()
-            ], 400);
+		if (is_array($sanity)) {
+            return $this->clientError($sanity, 400);
         } else {
             $result = Todo::create(array_merge(
 				$inputs,
@@ -87,7 +70,7 @@ class TodoController extends Controller
 
             return response()
                     ->json(['message' => "The element was created successfully."], 201)
-                    ->header('Location', "/todos/$category/$result->id");
+                    ->header('Location', "/todos/{$category}/{$result->id}");
         }
     }
 
@@ -100,60 +83,34 @@ class TodoController extends Controller
         ])->first();
 
         if (empty($todoElement)) {
-            return response()->json(['message' => "No element matching category:$category and id:$id."], 404);
+            return $this->clientError("No element matching category:{$category} and id:{$id}.", 404);
         }
 
-		$inputs = [];
-        if ($request->input('title') != null) {
-            $inputs['title'] = $request->input('title');
-        }
-        if ($request->input('comment') != null) {
-            $inputs['comment'] = $request->input('comment');
-        }
-        if ($request->input('done') != null) {
-            $inputs['done'] = $request->input('done');
-        }
-        if ($request->input('deleted') != null) {
-            $inputs['deleted'] = $request->input('deleted');
-        }
-        if ($request->input('due_at') != null) {
-            $inputs['due_at'] = $request->input('due_at');
-        }
-        if ($request->input('done_at') != null) {
-            $inputs['done_at'] = $request->input('done_at');
-        }
-        if ($request->input('deleted_at') != null) {
-            $inputs['deleted_at'] = $request->input('deleted_at');
-        }
+		$inputs = $this->filterInputs($request, [
+			'title',
+			'comment',
+			'done',
+			'deleted',
+			'due_at',
+			'done_at',
+			'deleted_at'
+		]);
 
         if (empty($inputs)) {
-            return response()->json(['message' => "Validation error: no parameter given."], 400);
+            return $this->clientError("Validation error: no parameter given.", 400);
         }
 
-        $rules = [
-			'title' => 'max:100',
-			'done' => 'boolean',
-            'deleted' => 'boolean',
-			'due_at' => 'regex:/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/',
-			'done_at' => 'regex:/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/',
-            'deleted_at' => 'regex:/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/'
-        ];
-        $messages = [
-			'title.max' => 'title must not exceed 100 characters.',
-			'done.boolean' => 'done must be a boolean.',
-            'deleted.boolean' => 'deleted must be a boolean.',
-			'due_at.regex' => 'due_at should match dateTime format.',
-			'done_at.regex' => 'done_at should match dateTime format.',
-			'deleted_at.regex' => 'deleted_at should match dateTime format.'
-        ];
+		$sanity = $this->sanityCheck($inputs, [
+			'title' => "todo-title:max",
+			'done' => "todo-done:boolean",
+            'deleted' => "todo-deleted:boolean",
+			'due_at' => "todo-due_at:regex",
+			'done_at' => "todo-done_at:regex",
+            'deleted_at' => "todo-deleted_at:regex"
+		]);
 
-        $validator = \Validator::make($inputs, $rules, $messages);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => "Validation errors in your request",
-                'errors' => $validator->errors()->all()
-            ], 400);
+		if (is_array($sanity)) {
+            return $this->clientError($sanity, 400);
         } else {
             foreach ($inputs as $key => $value) {
                 $todoElement[$key] = $value;
@@ -174,7 +131,7 @@ class TodoController extends Controller
         ])->first();
 
         if (empty($todoElement)) {
-            return response()->json(['message' => "No element matching category:$category and id:$id."], 404);
+            return $this->clientError("No element matching category:{$category} and id:{$id}.", 404);
         }
 
         $currentDate = DateHelper::currentDate();
@@ -196,7 +153,7 @@ class TodoController extends Controller
         ])->first();
 
         if (empty($todoElement)) {
-            return response()->json(['message' => "No element matching category:$category and id:$id."], 404);
+            return $this->clientError("No element matching category:{$category} and id:{$id}.", 404);
         }
 
         $currentDate = DateHelper::currentDate();
@@ -217,7 +174,7 @@ class TodoController extends Controller
         ])->first();
 
         if (empty($todoElement)) {
-            return response()->json(['message' => "No element matching category:$category and id:$id."], 404);
+            return $this->clientError("No element matching category:{$category} and id:{$id}.", 404);
         }
 
         $todoElement->delete();
