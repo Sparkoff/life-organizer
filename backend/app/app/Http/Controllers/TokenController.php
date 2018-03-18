@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Helpers\DateHelper;
+use ApiResponse;
 
 use App\Models\User;
 use App\Models\Token;
@@ -27,7 +27,7 @@ class TokenController extends Controller
 		]);
 
         if (empty($inputs)) {
-            return $this->clientError("Validation error: no parameter given.", 400);
+            return ApiResponse::missingParameters());
         }
 
         $sanity = $this->sanityCheck($inputs, [
@@ -36,7 +36,7 @@ class TokenController extends Controller
 		]);
 
 		if (is_array($sanity)) {
-            return $this->clientError($sanity, 400);
+            return ApiResponse::validationError($sanity);
         } else {
             $user = User::where([
     			['email', $inputs['email']],
@@ -44,7 +44,7 @@ class TokenController extends Controller
     		])->first();
 
             if (empty($user) || !password_verify($inputs['password'], $user->password)) {
-                return $this->clientError("No user matching email and password.", 404);
+                return ApiResponse::notFound("No user matching email and password.");
             }
 
 			$result = $user->tokens()->create([
@@ -52,11 +52,12 @@ class TokenController extends Controller
     			'expire_at' => (new DateTime())->add(new DateInterval('PT15M'))->format("Y-m-d H:i:s")
     		]);
 
-            return response()->json([
+			//return response()->json([
+            return ApiResponse::get([
     			'email' => $user->email,
     			'token' => $result->token,
     			'expire_at' => $result->expire_at
-    		], 200);
+    		]);
         }
 
 		// Log::info('Showing user: '.$user->id);
@@ -80,7 +81,7 @@ class TokenController extends Controller
 		$token->deleted_at = (new DateTime())->format("Y-m-d H:i:s");
 		$token->save();
 
-        return response()->json(['message' => "Done."], 200);
+        return ApiResponse::delete();
     }
 
 }

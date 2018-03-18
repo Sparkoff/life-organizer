@@ -12,25 +12,6 @@ class Controller extends BaseController
 {
 
 	/**
-     * Error output.
-     *
-	 * @param  array|string  $errorMessage
-     * @param  number  $errorCode
-     * @return object
-     */
-    protected function clientError($errorMessage, $errorCode = 400) {
-		$error = [
-			'message' => $errorMessage
-		];
-		if (is_array($errorMessage)) {
-			$error['message'] = "Validation errors in your request";
-			$error['errors'] = $errorMessage;
-		}
-
-		return response()->json($error, $errorCode);
-    }
-
-	/**
      * Filter Request inputs with item list.
      *
 	 * @param  Illuminate\Http\Request  $data
@@ -67,9 +48,9 @@ class Controller extends BaseController
 
 			$ruleOptions = [];
 			foreach (explode("|", $ruleConfig[1]) as $ruleOption) {
-				$ruleOptions[] = config('rules.'.$ruleConfig[0].'.'.$ruleOption.'.rule');
+				$ruleOptions[] = config("rules.{$ruleConfig[0]}.{$ruleOption}.rule");
 
-				$message = config('rules.'.$ruleConfig[0].'.'.$ruleOption.'.message');
+				$message = config("rules.{$ruleConfig[0]}.{$ruleOption}.message");
 				if ($message) {
 					$messages[$item.'.'.$ruleOption] = $message;
 				}

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use ApiResponse;
+
 use App\Helpers\DateHelper;
 
 use App\Models\Todo;
@@ -20,11 +22,7 @@ class TodoController extends Controller
 			['deleted', false]
 		])->get();
 
-        return response()
-				->json($todoElements, 200)
-				->header('Pagination-Count', count($todoElements))
-			    ->header('Pagination-Page', 1)
-			    ->header('Pagination-Limit', count($todoElements));
+        return ApiResponse::getList($todoElements, count($todoElements), 1, count($todoElements);
     }
 
     public function readById($category, $id)
@@ -36,10 +34,10 @@ class TodoController extends Controller
         ])->first();
 
         if (empty($todoElement)) {
-            return $this->$this->clientError("No element matching category:{$category} and id:{$id}.", 404);
+            return ApiResponse::notFound("No element matching category:{$category} and id:{$id}.");
         }
 
-        return response()->json($todoElement, 200);
+        return ApiResponse::get($todoElement);
     }
 
     public function create(Request $request, $category)
@@ -51,7 +49,7 @@ class TodoController extends Controller
 		]);
 
         if (empty($inputs)) {
-            return $this->clientError("Validation error: no parameter given.", 400);
+            return ApiResponse::missingParameters();
         }
 
 		$sanity = $this->sanityCheck($inputs, [
@@ -61,16 +59,14 @@ class TodoController extends Controller
 		]);
 
 		if (is_array($sanity)) {
-            return $this->clientError($sanity, 400);
+            return ApiResponse::validationError($sanity);
         } else {
             $result = Todo::create(array_merge(
 				$inputs,
 				['category' => $category]
 			));
 
-            return response()
-                    ->json(['message' => "The element was created successfully."], 201)
-                    ->header('Location', "/todos/{$category}/{$result->id}");
+            return ApiResponse::post("/todos/{$category}/{$result->id}");
         }
     }
 
@@ -83,7 +79,7 @@ class TodoController extends Controller
         ])->first();
 
         if (empty($todoElement)) {
-            return $this->clientError("No element matching category:{$category} and id:{$id}.", 404);
+            return ApiResponse::notFound("No element matching category:{$category} and id:{$id}.");
         }
 
 		$inputs = $this->filterInputs($request, [
@@ -97,7 +93,7 @@ class TodoController extends Controller
 		]);
 
         if (empty($inputs)) {
-            return $this->clientError("Validation error: no parameter given.", 400);
+            return ApiResponse::missingParameters();
         }
 
 		$sanity = $this->sanityCheck($inputs, [
@@ -110,7 +106,7 @@ class TodoController extends Controller
 		]);
 
 		if (is_array($sanity)) {
-            return $this->clientError($sanity, 400);
+            return ApiResponse::validationError($sanity);
         } else {
             foreach ($inputs as $key => $value) {
                 $todoElement[$key] = $value;
@@ -118,7 +114,7 @@ class TodoController extends Controller
             $todoElement->updated_at = DateHelper::currentDate();
             $todoElement->update();
 
-            return response()->json($todoElement, 200);
+            return ApiResponse::patch($todoElement);
         }
     }
 
@@ -131,7 +127,7 @@ class TodoController extends Controller
         ])->first();
 
         if (empty($todoElement)) {
-            return $this->clientError("No element matching category:{$category} and id:{$id}.", 404);
+            return ApiResponse::notFound("No element matching category:{$category} and id:{$id}.");
         }
 
         $currentDate = DateHelper::currentDate();
@@ -141,7 +137,7 @@ class TodoController extends Controller
 		$todoElement->updated_at = $currentDate;
         $todoElement->update();
 
-        return response("", 204);
+        return ApiResponse::patchNoResponse();
     }
 
     public function delete($category, $id)
@@ -153,7 +149,7 @@ class TodoController extends Controller
         ])->first();
 
         if (empty($todoElement)) {
-            return $this->clientError("No element matching category:{$category} and id:{$id}.", 404);
+            return ApiResponse::notFound("No element matching category:{$category} and id:{$id}.");
         }
 
         $currentDate = DateHelper::currentDate();
@@ -163,7 +159,7 @@ class TodoController extends Controller
 		$todoElement->updated_at = $currentDate;
         $todoElement->update();
 
-        return response("", 204);
+        return ApiResponse::delete();
     }
 
     public function remove($category, $id)
@@ -174,12 +170,12 @@ class TodoController extends Controller
         ])->first();
 
         if (empty($todoElement)) {
-            return $this->clientError("No element matching category:{$category} and id:{$id}.", 404);
+            return ApiResponse::notFound("No element matching category:{$category} and id:{$id}.");
         }
 
         $todoElement->delete();
 
-        return response()->json("", 204);
+        return ApiResponse::delete();
     }
 
 }

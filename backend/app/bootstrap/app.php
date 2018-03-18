@@ -23,9 +23,12 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
-$app->withFacades();
+$app->withFacades(true, [
+	'App\Facades\ApiResponse' => 'ApiResponse'
+]);
 
 $app->withEloquent();
+
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +51,7 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
+
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -67,6 +71,7 @@ $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
 ]);
 
+
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
@@ -81,6 +86,8 @@ $app->routeMiddleware([
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\ApiResponseServiceProvider::class);
+
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +106,7 @@ $app->router->group([
     require __DIR__.'/../routes/web.php';
 });
 
+
 /*
 |--------------------------------------------------------------------------
 | Load Configurations
@@ -108,5 +116,7 @@ $app->router->group([
 */
 
 $app->configure('rules');
+$app->configure('apiResponse');
+
 
 return $app;

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Helpers\DateHelper;
+use ApiResponse;
 
 use App\Models\User;
 
@@ -40,11 +40,7 @@ class UserController extends Controller
 			'all' => User::all()
 		];
 
-        return response()
-				->json($users, 200)
-				->header('Pagination-Count', count($users))
-			    ->header('Pagination-Page', 1)
-			    ->header('Pagination-Limit', count($users));
+        return ApiResponse::getList($users, count($users), 1, count($users));
     }
 
     public function readById($id)
@@ -55,10 +51,10 @@ class UserController extends Controller
 		])->first();
 
         if (empty($user)) {
-            return $this->clientError("No user matching id:{$id}.", 404);
+            return ApiResponse::notFound("No user matching id:{$id}.");
         }
 
-        return response()->json($user, 200);
+        return ApiResponse::get($user);
     }
 
     public function create(Request $request)
@@ -71,7 +67,7 @@ class UserController extends Controller
 		]);
 
         if (empty($inputs)) {
-            return $this->clientError("Validation error: no parameter given.", 400);
+            return ApiResponse::missingParameters();
         }
 
         $sanity = $this->sanityCheck($inputs, [
@@ -81,13 +77,13 @@ class UserController extends Controller
 		]);
 
         if (is_array($sanity)) {
-            return $this->clientError($sanity, 400);
+            return ApiResponse::validationError($sanity);
         } else {
             if (User::where([
                 ['email', $inputs['email']],
                 ['deleted', false]
             ])->exists()) {
-                return $this->clientError("User with email:{$inputs['email']} already exist.", 409);
+                return ApiResponse::conflict("User with email:{$inputs['email']} already exist.");
             }
 
             unset($inputs['password_confirmation']);
@@ -95,9 +91,7 @@ class UserController extends Controller
 
             $result = User::create($inputs);
 
-            return response()
-                    ->json(['message' => "The element was created successfully."], 201)
-                    ->header('Location', "/users/{$result->id}");
+            return ApiResponse::post("/users/{$result->id}");
         }
     }
 
