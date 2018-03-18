@@ -1,12 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Models;
+
+use App\Models\Model;
 
 use Illuminate\Auth\Authenticatable;
 use Laravel\Lumen\Auth\Authorizable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
@@ -18,7 +20,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'name',
+		'email',
+		'password'
     ];
 
     /**
@@ -27,6 +31,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password'
     ];
+
+
+	// DEFINE RELATIONSHIPS
+	public function tokens() {
+        return $this->hasMany('App\Models\Token');
+    }
 }

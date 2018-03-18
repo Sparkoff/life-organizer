@@ -1,0 +1,13 @@
+---
+- name: Update alias ll to bashrc
+  lineinfile:
+    path: /home/vagrant/.bashrc
+    regexp: "^alias ll"
+    line: "alias ll='ls -lArth'"
+    state: present
+
+- name: Add cd
+  lineinfile:
+    path: /home/vagrant/.bashrc
+    line: "cd /vagrant/app"
+    state: present

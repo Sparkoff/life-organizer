@@ -3,6 +3,7 @@
   get_url:
     url: https://getcomposer.org/installer
     dest: /tmp/composerInstaller
+    force: no
 
 - name: Install Composer
   shell: cat /tmp/composerInstaller | php -- --install-dir=/usr/local/bin
